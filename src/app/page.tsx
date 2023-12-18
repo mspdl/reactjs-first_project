@@ -1,4 +1,4 @@
-import Square, { Circle } from "./components/Geo";
+import GeoForm from "./components/GeoForm";
 
 const Page = () => {
   return (
@@ -6,8 +6,7 @@ const Page = () => {
       <h1 className="font-bold text-2xl">Hello World!</h1>
       <h3>Another text</h3>
 
-      <Square />
-      <Circle />
+      <GeoForm />
     </div>
   );
 };
