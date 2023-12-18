@@ -1,12 +1,14 @@
-import GeoForm from "./components/GeoForm";
+import GeoForm from "./components/GeoForms";
+import PersonList from "./components/PersonList";
 
 const Page = () => {
   return (
-    <div>
+    <div className="flex flex-col items-center max-w-7xl mt-4">
       <h1 className="font-bold text-2xl">Hello World!</h1>
       <h3>Another text</h3>
 
       <GeoForm />
+      <PersonList />
     </div>
   );
 };
