@@ -1,19 +1,39 @@
+const getWeekday = () => {
+  return new Intl.DateTimeFormat("default", { weekday: "long" }).format(
+    new Date()
+  );
+};
+
 const Person = () => {
+  const personData = {
+    name: "Bill Gates",
+    avatarUrl:
+      "https://pbs.twimg.com/profile_images/1674815862879178752/nTGMV1Eo_400x400.jpg",
+    roles: [
+      "Tycoon",
+      "Businessman",
+      "CEO",
+      "Investor",
+      "Philanthropist",
+      "Author",
+    ],
+  };
+
   return (
     <>
-      <h1>Bill Gates</h1>
+      <p className="italic">{getWeekday()}</p>
+      <h1 style={{ color: "blue", fontSize: "20px" }}>
+        Name: {personData.name}
+      </h1>
       <img
-        src="https://pbs.twimg.com/profile_images/1674815862879178752/nTGMV1Eo_400x400.jpg"
-        alt="Bill Gates profile picture"
+        src={personData.avatarUrl}
+        alt={personData.name + "'s profile picture"}
         className="max-w-sm"
       />
       <ul>
-        <li className="list-disc">Tycoon</li>
-        <li className="list-disc">Businessman</li>
-        <li className="list-disc">CEO</li>
-        <li className="list-disc">Investor</li>
-        <li className="list-disc">Philanthropist</li>
-        <li className="list-disc">Author</li>
+        {personData.roles.map((role) => (
+          <li className="list-disc">{role}</li>
+        ))}
       </ul>
     </>
   );
