@@ -24,6 +24,10 @@ const PersonList = () => {
           "Full stack developer",
         ]}
       />
+      <Person 
+        name="John Papa"
+        roles={["unkown"]}
+      />
     </div>
   );
 };

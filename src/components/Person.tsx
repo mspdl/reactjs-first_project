@@ -1,20 +1,13 @@
-const getWeekday = () => {
-  return new Intl.DateTimeFormat("default", { weekday: "long" }).format(
-    new Date()
-  );
-};
-
 type PersonProps = {
   name: string;
-  avatarUrl: string;
+  avatarUrl?: string;
   roles: string[];
   address?: string;
 };
 
-const Person = ({ name, avatarUrl, roles }: PersonProps) => {
+const Person = ({ name, avatarUrl = "https://cdn-icons-png.flaticon.com/512/6388/6388000.png", roles }: PersonProps) => {
   return (
-    <div className="p">
-      <p className="italic">{getWeekday()}</p>
+    <div className="p-7 m-5 border-2">
       <h1 style={{ color: "blue", fontSize: "20px" }}>Name: {name}</h1>
       <img
         src={avatarUrl}
