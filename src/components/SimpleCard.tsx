@@ -10,7 +10,8 @@ export const Card = ({ children, phrase, author }: SimpleCardProps) => {
       <p className="italic">
         "{children} {phrase}"
       </p>
-      <p className="text-xs text-right">{author ?? "Unkown author"}</p>
+      <p className="text-xs text-right"> - {author ?? "Unkown author"}</p>{" "}
+      {author && "zZz"}
     </div>
   );
 };
