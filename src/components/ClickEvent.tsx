@@ -7,6 +7,10 @@ const ClickEvent = () => {
     alert("it worked (Fourth approach)!");
   };
 
+  const handleButtonClickWithParam = (param: string) => {
+    alert(`it worked (${param} approach)!`);
+  };
+
   return (
     <>
       <button
@@ -36,6 +40,12 @@ const ClickEvent = () => {
         className="p-3 bg-black text-white rounded-md w-1/5"
       >
         Click here - Fourth approach
+      </button>
+      <button
+        onClick={() => handleButtonClickWithParam("Fifth")}
+        className="p-3 bg-black text-white rounded-md w-1/5"
+      >
+        Click here - Fifth approach
       </button>
     </>
   );
