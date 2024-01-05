@@ -1,9 +1,11 @@
-import PersonList from "../components/PersonList";
+"use client";
+
+import ClickEvent from "@/components/ClickEvent";
 
 const Page = () => {
   return (
-    <div className="flex flex-col items-center max-w-7xl mt-4">
-      <PersonList />
+    <div className="w-screen h-screen flex flex-col gap-2 justify-center items-center">
+      <ClickEvent />
     </div>
   );
 };
