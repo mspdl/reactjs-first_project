@@ -1,20 +1,22 @@
 import { useState } from "react";
 
 const StateExample = () => {
-  const [count, setCount] = useState(0);
+  const [showSecret, setShowScret] = useState(false);
 
   const handleButtonClick = () => {
-    setCount(count + 1);
+    setShowScret(!showSecret);
   };
   return (
     <>
-      <p>{count}</p>
       <button
         className="border p-3 rounded-md bg-cyan-300"
         onClick={handleButtonClick}
       >
-        +1
+        {showSecret ? "Hide" : "Show"} secret area
       </button>
+      {showSecret && (
+        <div className="p-3 bg-blue-300 rounded-md mt-3">Secret area</div>
+      )}
     </>
   );
 };
