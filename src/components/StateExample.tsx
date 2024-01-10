@@ -15,15 +15,8 @@ const StateExample = () => {
   };
 
   const handleCountButtonClick = () => {
-    console.log("count 0: ", count);
-    setCount(count + 2);
-    console.log("count 1: ", count);
-    setCount(count + 2);
-    console.log("count 2: ", count);
-    setCount(count + 2);
-    console.log("count 3: ", count);
-    console.log("new count: ", count + 2);
-    alert(count);
+    setCount(count + 1);
+    setCount((oldCount) => oldCount + 1);
   };
 
   return (
