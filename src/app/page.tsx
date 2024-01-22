@@ -1,11 +1,11 @@
 "use client";
 
-import EffectExample from "@/components/EffectExample";
+import RealUseEffect from "@/components/RealUseEffect";
 
 const Page = () => {
   return (
     <div className="w-screen h-screen flex flex-col gap-2 justify-center items-center">
-      <EffectExample />
+      <RealUseEffect />
     </div>
   );
 };
