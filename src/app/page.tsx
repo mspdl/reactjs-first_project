@@ -1,11 +1,11 @@
 "use client";
 
-import RealUseEffect from "@/components/RealUseEffect";
+import CleanUp from "@/components/CleanUp";
 
 const Page = () => {
   return (
     <div className="w-screen h-screen flex flex-col gap-2 justify-center items-center">
-      <RealUseEffect />
+      <CleanUp />
     </div>
   );
 };
