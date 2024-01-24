@@ -36,7 +36,11 @@ export const listReducer = (list: Item[], action: ListAction) => {
     case "add":
       return [
         ...list,
-        { id: list.length, text: action.payload.text, isDone: false },
+        {
+          id: Math.floor(Date.now() * Math.random() * 10),
+          text: action.payload.text,
+          isDone: false,
+        },
       ];
 
     case "edit":
@@ -47,7 +51,9 @@ export const listReducer = (list: Item[], action: ListAction) => {
 
     case "check":
       return list.map((item) => {
-        if (item.id === action.payload.id) item.isDone = !item.isDone;
+        if (item.id === action.payload.id) {
+          item.isDone = !item.isDone;
+        }
         return item;
       });
 
