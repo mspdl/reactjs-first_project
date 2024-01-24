@@ -51,9 +51,7 @@ export const listReducer = (list: Item[], action: ListAction) => {
 
     case "check":
       return list.map((item) => {
-        if (item.id === action.payload.id) {
-          item.isDone = !item.isDone;
-        }
+        if (item.id === action.payload.id) item.isDone = item.isDone;
         return item;
       });
 
