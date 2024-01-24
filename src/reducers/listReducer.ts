@@ -29,11 +29,32 @@ type RemoveAction = {
   };
 };
 
-type ListActions = AddAction | EditTextAction | CheckAction | RemoveAction;
+type ListAction = AddAction | EditTextAction | CheckAction | RemoveAction;
 
-export const listReducer = (list: Item[], action: ListActions) => {
-  action.type;
-  action.payload;
+export const listReducer = (list: Item[], action: ListAction) => {
+  switch (action.type) {
+    case "add":
+      return [
+        ...list,
+        { id: list.length, text: action.payload.text, isDone: false },
+      ];
 
-  return list;
+    case "edit":
+      return list.map((item) => {
+        if (item.id === action.payload.id) item.text = action.payload.newText;
+        return item;
+      });
+
+    case "check":
+      return list.map((item) => {
+        if (item.id === action.payload.id) item.isDone = !item.isDone;
+        return item;
+      });
+
+    case "remove":
+      return list.filter((item) => item.id !== action.payload.id);
+
+    default:
+      return list;
+  }
 };
