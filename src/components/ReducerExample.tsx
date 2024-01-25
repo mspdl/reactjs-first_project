@@ -28,10 +28,32 @@ const ReducerExample = () => {
   };
 
   const handleEditItem = (itemId: number) => {
-  
+    const editingItem = list.find((item) => item.id === itemId);
+    if (!editingItem) return false;
+
+    const newText = window.prompt("Edit Task", editingItem.text);
+    if (!newText || newText.trim() === "") return false;
+
+    dispatch({
+      type: "edit",
+      payload: {
+        id: itemId,
+        newText,
+      },
+    });
   };
 
   const handleDeleteItem = (itemId: number) => {
+    const deletingItem = list.find((item) => item.id === itemId);
+
+    if (
+      !window.confirm(
+        `You're going to delete the task: ${deletingItem?.text}\n` +
+          "Are you sure?"
+      )
+    )
+      return false;
+
     dispatch({
       type: "remove",
       payload: { id: itemId },
