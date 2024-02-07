@@ -9,6 +9,7 @@ type User = {
 
 export const RequestAPI = () => {
   const [hasError, setHasError] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [users, setUsers] = useState<User[]>([]);
 
   useEffect(() => {
@@ -22,6 +23,7 @@ export const RequestAPI = () => {
         setHasError(true);
       })
       .finally(() => {
+        setLoading(false);
         console.log("Called finally()");
       });
   }, []);
@@ -30,9 +32,9 @@ export const RequestAPI = () => {
     <div className="">
       <h1 className="text-3xl text-center pb-3">User list</h1>
 
-      {users.length <= 0 && !hasError && <p className="text-center font-bold">loading...</p>}
+      {loading && <p className="text-center font-bold">loading...</p>}
       {hasError && <p className="text-center font-bold">ERROR on API</p>}
-      {users.length > 0 && (
+      {!loading && users.length > 0 && (
         <ul>
           {users.map((user) => (
             <li key={user.id}>
@@ -45,6 +47,7 @@ export const RequestAPI = () => {
           ))}
         </ul>
       )}
+      {!loading && users.length <= 0 && "There's no users to show"}
     </div>
   );
 };
