@@ -25,14 +25,37 @@ export const Posts = () => {
     setLoading(false);
   };
 
+  const handleAddNewPost = async () => {
+    const response = await fetch("https://jsonplaceholder.typicode.com/posts", {
+      method: "POST",
+      body: JSON.stringify({
+        title: `New post ${Math.trunc(Math.random() * 100) + 1}`,
+        body: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nam sit facere doloribus similique suscipit, hic dolore aliquam. Voluptate, harum explicabo.",
+        userId: 1,
+      }),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    });
+
+    const json = await response.json();
+    console.log(json);
+  };
+
   useEffect(() => {
     getPosts();
   }, []);
 
   return (
-    <div className="max-w-5xl">
-      
+    <div className="max-w-5xl flex flex-col">
       <h1 className="text-3xl text-center pb-3">Post list</h1>
+
+      <button
+        onClick={handleAddNewPost}
+        className="sticky top-3 text self-center bg-blue-700 p-2 mb-3 border border-white rounded-md text-white hover:bg-blue-900"
+      >
+        Add new post
+      </button>
 
       {loading && <p className="text-center font-bold">loading...</p>}
       {hasError && <p className="text-center font-bold">ERROR on API</p>}
