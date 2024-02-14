@@ -4,6 +4,7 @@ import { useRef } from "react";
 export const Axios = () => {
   const currentPostId = 3;
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const controller = new AbortController();
 
   const handleGetComments = async () => {
     const requestParams = { postId: currentPostId, sort: "desc" };
@@ -41,6 +42,20 @@ export const Axios = () => {
     }
   };
 
+  const handleMakeRequest = async () => {
+    try {
+      const response = await api.get("/posts", {
+        signal: controller.signal,
+      });
+    } catch (error) {
+      console.log("Something wrong happened");
+    }
+  };
+
+  const handleCancelRequest = () => {
+    controller.abort();
+  };
+
   return (
     <div className="flex flex-col gap-3">
       <button
@@ -63,6 +78,21 @@ export const Axios = () => {
       >
         Send File
       </button>
+      <hr />
+      <div className="flex justify-around">
+        <button
+          className="bg-blue-700 hover:bg-blue-900 hover:text-gray-400 p-2 text-gray-300 rounded-md border border-gray-300"
+          onClick={handleMakeRequest}
+        >
+          Make request
+        </button>
+        <button
+          className="bg-blue-700 hover:bg-blue-900 hover:text-gray-400 p-2 text-gray-300 rounded-md border border-gray-300"
+          onClick={handleCancelRequest}
+        >
+          Cancel request
+        </button>
+      </div>
     </div>
   );
 };
