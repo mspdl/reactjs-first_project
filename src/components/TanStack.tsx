@@ -1,22 +1,25 @@
 import { Post } from "@/types/Post";
-import { getPosts } from "@/utils/api";
-import { useQuery } from "@tanstack/react-query";
+import { usePosts } from "@/utils/queries";
 
 export const TanStack = () => {
-  const query = useQuery({
-    queryKey: ["posts"],
-    queryFn: getPosts,
-  });
+  const posts = usePosts();
 
   return (
     <div className="">
-      <h1 className="text-white text-3xl text-center">Hello world</h1>
+      <h1 className="text-white text-3xl text-center pt-5">Hello world</h1>
 
-      {query.isLoading && "Loading..."}
-      {query.data && (
+      {posts.isLoading && "Loading..."}
+      {posts.data && (
         <ul>
-          {query.data.map((post: Post) => (
-            <li key={post.id}>{post.title}</li>
+          {posts.data.map((post: Post) => (
+            <li
+              key={post.id}
+              className="border border-white my-2 p-2 rounded-md"
+            >
+              <h1 className="font-bold text-xl">{post.title}</h1>
+              <p>{post.body}</p>
+              <p className="text-sm italic text-end">{`Post number ${post.id} by user id ${post.userId}`}</p>
+            </li>
           ))}
         </ul>
       )}
