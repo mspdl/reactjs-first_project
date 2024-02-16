@@ -1,14 +1,11 @@
 import { Post } from "@/types/Post";
-import { api } from "@/utils/api";
+import { getPosts } from "@/utils/api";
 import { useQuery } from "@tanstack/react-query";
 
 export const TanStack = () => {
   const query = useQuery({
     queryKey: ["posts"],
-    queryFn: async (): Promise<Post[]> => {
-      const result = await api.get("posts");
-      return result.data;
-    },
+    queryFn: getPosts,
   });
 
   return (
