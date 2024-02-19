@@ -10,6 +10,6 @@ export const usePosts = () => {
 
 export const usePostById = (postId: number) =>
   useQuery({
-    queryKey: ["post"],
+    queryKey: ["posts", postId],
     queryFn: () => getPostById(postId),
   });
