@@ -6,9 +6,9 @@ export const TanStack = () => {
 
   return (
     <div className="">
-      <h1 className="text-white text-3xl text-center pt-5">Hello world</h1>
-
-      {posts.isLoading && "Loading..."}
+      <h1 className="text-white text-3xl text-center pt-5">Hello world</h1>.
+      {posts.isLoading && <p>Loading...</p>}
+      {posts.isFetching && <p>Fetching...</p>}
       {posts.data && (
         <ul>
           {posts.data.map((post: Post) => (
