@@ -1,4 +1,4 @@
-import { Item } from "@/data/Item";
+import { Item } from "@/types/Item";
 
 type AddAction = {
   type: "add";
