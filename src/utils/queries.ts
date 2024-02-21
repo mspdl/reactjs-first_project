@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { getPostById, getPosts } from "./api";
 
-export const usePosts = () => {
+export const usePosts = (enabled?: boolean) => {
   return useQuery({
     networkMode: "online",
     // networkMode: default = online
@@ -9,6 +9,7 @@ export const usePosts = () => {
     queryKey: ["posts"],
     queryFn: getPosts,
     // slateTime: Infinity = the request will be always fresh, it'll never be slate 
+    enabled // default = true || false = disable this query function
   });
 };
 
