@@ -6,7 +6,7 @@ export const TanStack = () => {
   const postsPerPage = 3;
   const [currentPage, setCurrentPage] = useState(1);
 
-  const posts = usePosts();
+  const posts = usePosts(postsPerPage, currentPage * postsPerPage);
 
   const handlePreviousPage = () => {
     setCurrentPage(currentPage === 0 ? 0 : currentPage - 1);
@@ -17,16 +17,24 @@ export const TanStack = () => {
   };
 
   return (
-    <div className="flex flex-col">
-      <h1 className="text-white text-3xl text-center pt-5">Hello world</h1>
+    <div className="flex flex-col w-full">
+      <div className="">
+        <h1 className="text-white text-3xl text-center pt-5 pb-2">Posts Page</h1>
 
-      <div className="border border-green-300 p-3">
-        <div>Posts per pager: {postsPerPage}</div>
-        <div>current page: {currentPage + 1}</div>
-        <button className="border px-2 mr-2" disabled={currentPage === 0} onClick={handlePreviousPage}>
-          Previous page
-        </button>
-        <button className="border px-2" onClick={handleNextPage}>Next page</button>
+        <div className="border border-green-300 p-3">
+          <div>Posts per pager: {postsPerPage}</div>
+          <div>current page: {currentPage + 1}</div>
+          <button
+            className="border px-2 mr-2"
+            disabled={currentPage === 0}
+            onClick={handlePreviousPage}
+          >
+            Previous page
+          </button>
+          <button className="border px-2" onClick={handleNextPage}>
+            Next page
+          </button>
+        </div>
       </div>
 
       {posts.isLoading && <p>Loading...</p>}
