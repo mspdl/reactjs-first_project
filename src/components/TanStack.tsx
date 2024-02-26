@@ -19,21 +19,28 @@ export const TanStack = () => {
   return (
     <div className="flex flex-col w-full">
       <div className="">
-        <h1 className="text-white text-3xl text-center pt-5 pb-2">Posts Page</h1>
+        <h1 className="text-white text-3xl text-center pt-5 pb-2">
+          Posts Page
+        </h1>
 
         <div className="border border-green-300 p-3">
           <div>Posts per pager: {postsPerPage}</div>
           <div>current page: {currentPage + 1}</div>
-          <button
-            className="border px-2 mr-2"
-            disabled={currentPage === 0}
-            onClick={handlePreviousPage}
-          >
-            Previous page
-          </button>
-          <button className="border px-2" onClick={handleNextPage}>
-            Next page
-          </button>
+          <div className="inline-flex">
+            <button
+              disabled={currentPage === 0}
+              onClick={handlePreviousPage}
+              className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              Prev
+            </button>
+            <button
+              onClick={handleNextPage}
+              className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r"
+            >
+              Next
+            </button>
+          </div>
         </div>
       </div>
 
