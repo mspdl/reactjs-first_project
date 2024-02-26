@@ -3,26 +3,31 @@ import { usePosts } from "@/utils/queries";
 import { useState } from "react";
 
 export const TanStack = () => {
-  const [allowLoadPosts, setAllowLoadPosts] = useState(false);
+  const postsPerPage = 3;
+  const [currentPage, setCurrentPage] = useState(1);
 
-  const posts = usePosts(allowLoadPosts);
+  const posts = usePosts();
 
-  const handleLoadPosts = () => {
-    setAllowLoadPosts(true);
+  const handlePreviousPage = () => {
+    setCurrentPage(currentPage === 0 ? 0 : currentPage - 1);
+  };
+
+  const handleNextPage = () => {
+    setCurrentPage(currentPage + 1);
   };
 
   return (
     <div className="flex flex-col">
       <h1 className="text-white text-3xl text-center pt-5">Hello world</h1>
 
-      {!allowLoadPosts && (
-        <button
-          onClick={handleLoadPosts}
-          className="self-center border border-white p-2 bg-white rounded-md hover:bg-gray-300 font-bold"
-        >
-          Load posts
+      <div className="border border-green-300 p-3">
+        <div>Posts per pager: {postsPerPage}</div>
+        <div>current page: {currentPage + 1}</div>
+        <button className="border px-2 mr-2" disabled={currentPage === 0} onClick={handlePreviousPage}>
+          Previous page
         </button>
-      )}
+        <button className="border px-2" onClick={handleNextPage}>Next page</button>
+      </div>
 
       {posts.isLoading && <p>Loading...</p>}
       {posts.isFetching && <p>Fetching...</p>}
