@@ -4,7 +4,7 @@ import { useState } from "react";
 
 export const TanStack = () => {
   const postsPerPage = 3;
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(0);
 
   const posts = usePosts(postsPerPage, currentPage * postsPerPage);
 
