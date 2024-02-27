@@ -1,4 +1,5 @@
-import { keepPreviousData, useQuery } from "@tanstack/react-query";
+import { postsInitialData } from "@/data/postsInitialData";
+import { useQuery } from "@tanstack/react-query";
 import { getPostById, getPosts } from "./api";
 
 export const usePosts = (limit: number, start: number) => {
@@ -10,7 +11,7 @@ export const usePosts = (limit: number, start: number) => {
     queryFn: () => getPosts(limit, start),
     // slateTime: Infinity = the request will be always fresh, it'll never be slate
     enabled: true, // default = true || false = disable this query function
-    placeholderData: keepPreviousData,
+    placeholderData: postsInitialData,
   });
 };
 
