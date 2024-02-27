@@ -1,8 +1,10 @@
 import { Post } from "@/types/Post";
-import { usePosts } from "@/utils/queries";
+import { usePosts, useUsersPrefecth } from "@/utils/queries";
 import { useState } from "react";
 
 export const TanStack = () => {
+  useUsersPrefecth();
+
   const postsPerPage = 3;
   const [currentPage, setCurrentPage] = useState(0);
 
