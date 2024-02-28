@@ -1,5 +1,7 @@
 import { Post } from "@/types/Post";
+import { addPost } from "@/utils/api";
 import { invalidatePosts, usePosts, useUsersPrefecth } from "@/utils/queries";
+import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 
 export const TanStack = () => {
@@ -10,6 +12,10 @@ export const TanStack = () => {
 
   const posts = usePosts(postsPerPage, currentPage * postsPerPage);
 
+  const addMutation = useMutation({
+    mutationFn: addPost,
+  });
+
   const handlePreviousPage = () => {
     setCurrentPage(currentPage === 0 ? 0 : currentPage - 1);
   };
@@ -19,7 +25,11 @@ export const TanStack = () => {
   };
 
   const handleNewPostButton = () => {
-    invalidatePosts();
+    addMutation.mutate({
+      body: "beautyful body test",
+      title: "title test",
+      userId: 1,
+    });
   };
 
   return (
