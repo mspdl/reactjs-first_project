@@ -1,5 +1,5 @@
 import { Post } from "@/types/Post";
-import { usePosts, useUsersPrefecth } from "@/utils/queries";
+import { invalidatePosts, usePosts, useUsersPrefecth } from "@/utils/queries";
 import { useState } from "react";
 
 export const TanStack = () => {
@@ -18,12 +18,21 @@ export const TanStack = () => {
     setCurrentPage(currentPage + 1);
   };
 
+  const handleNewPostButton = () => {
+    invalidatePosts();
+  };
+
   return (
     <div className="flex flex-col w-full">
       <div className="">
         <h1 className="text-white text-3xl text-center pt-5 pb-2">
           Posts Page
         </h1>
+
+        <div className="p-3 my-3 border-white">
+          <p className="block">New post area</p>
+          <button onClick={handleNewPostButton}>Add new post</button>
+        </div>
 
         <div className="border border-green-300 p-3">
           <div>Posts per pager: {postsPerPage}</div>
