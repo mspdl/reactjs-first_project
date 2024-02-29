@@ -44,7 +44,9 @@ export const TanStack = () => {
           <p>{addMutation.isPending && "Inserting a new post"}</p>
           <p>{addMutation.isIdle && " new post is idle"}</p>
           <p>{addMutation.isSuccess && " new post is successfuly"}</p>
-          <p>Status of new post: {addMutation.status}</p>
+          <p className="cursor-pointer" onClick={() => addMutation.reset()}>
+            Status of new post: {addMutation.status}
+          </p>
           <button
             disabled={addMutation.isPending}
             onClick={handleNewPostButton}
