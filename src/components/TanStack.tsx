@@ -1,6 +1,6 @@
 import { Post } from "@/types/Post";
 import { addPost } from "@/utils/api";
-import { invalidatePosts, usePosts, useUsersPrefecth } from "@/utils/queries";
+import { usePosts, useUsersPrefecth } from "@/utils/queries";
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 
@@ -40,8 +40,17 @@ export const TanStack = () => {
         </h1>
 
         <div className="p-3 my-3 border-white">
-          <p className="block">New post area</p>
-          <button onClick={handleNewPostButton}>Add new post</button>
+          <p className="font-bold text-center block">New post area</p>
+          <p>{addMutation.isPending && "Inserting a new post"}</p>
+          <p>{addMutation.isIdle && " new post is idle"}</p>
+          <p>{addMutation.isSuccess && " new post is successfuly"}</p>
+          <p>Status of new post: {addMutation.status}</p>
+          <button
+            disabled={addMutation.isPending}
+            onClick={handleNewPostButton}
+          >
+            Add new post
+          </button>
         </div>
 
         <div className="border border-green-300 p-3">
