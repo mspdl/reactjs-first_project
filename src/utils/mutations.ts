@@ -1,3 +1,4 @@
+import { Post } from "@/types/Post";
 import { useMutation } from "@tanstack/react-query";
 import { addPost } from "./api";
 import { queryClient } from "./queryClient";
@@ -5,10 +6,9 @@ import { queryClient } from "./queryClient";
 export const useAddPost = () => {
   return useMutation({
     mutationFn: addPost,
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["/posts"],
-      });
+    onSuccess: (newPost) => {
+      const posts = queryClient.getQueryData(["posts"]) as Post[];
+      queryClient.setQueryData(["posts"], [newPost, ...posts]);
     },
   });
 };
