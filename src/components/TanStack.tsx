@@ -1,20 +1,16 @@
 import { Post } from "@/types/Post";
-import { addPost } from "@/utils/api";
+import { useAddPost } from "@/utils/mutations";
 import { usePosts, useUsersPrefecth } from "@/utils/queries";
-import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 
 export const TanStack = () => {
   useUsersPrefecth();
+  const addPost = useAddPost();
 
   const postsPerPage = 3;
   const [currentPage, setCurrentPage] = useState(0);
 
   const posts = usePosts(postsPerPage, currentPage * postsPerPage);
-
-  const addMutation = useMutation({
-    mutationFn: addPost,
-  });
 
   const handlePreviousPage = () => {
     setCurrentPage(currentPage === 0 ? 0 : currentPage - 1);
@@ -24,20 +20,14 @@ export const TanStack = () => {
     setCurrentPage(currentPage + 1);
   };
 
-  const handleNewPostButton = async () => {
+  const handleNewPostButton = () => {
     const data = {
       body: "beautyful body test",
       title: "title test",
       userId: 1,
     };
 
-    try {
-      const value = await addMutation.mutateAsync(data);
-      console.log("Everything worked fine");
-      console.log("handleNewPostButton after mutate");
-    } catch (error) {
-      // show a error message
-    }
+    addPost.mutate(data);
   };
 
   return (
@@ -49,16 +39,13 @@ export const TanStack = () => {
 
         <div className="p-3 my-3 border-white">
           <p className="font-bold text-center block">New post area</p>
-          <p>{addMutation.isPending && "Inserting a new post"}</p>
-          <p>{addMutation.isIdle && " new post is idle"}</p>
-          <p>{addMutation.isSuccess && " new post is successfuly"}</p>
-          <p className="cursor-pointer" onClick={() => addMutation.reset()}>
-            Status of new post: {addMutation.status}
+          <p>{addPost.isPending && "Inserting a new post"}</p>
+          <p>{addPost.isIdle && " new post is idle"}</p>
+          <p>{addPost.isSuccess && " new post is successfuly"}</p>
+          <p className="cursor-pointer" onClick={() => addPost.reset()}>
+            Status of new post: {addPost.status}
           </p>
-          <button
-            disabled={addMutation.isPending}
-            onClick={handleNewPostButton}
-          >
+          <button disabled={addPost.isPending} onClick={handleNewPostButton}>
             Add new post
           </button>
         </div>
