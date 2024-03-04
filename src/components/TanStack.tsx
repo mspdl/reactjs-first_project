@@ -24,22 +24,20 @@ export const TanStack = () => {
     setCurrentPage(currentPage + 1);
   };
 
-  const handleNewPostButton = () => {
-    addMutation.mutate(
-      {
-        body: "beautyful body test",
-        title: "title test",
-        userId: 1,
-      },
-      {
-        onSuccess: (data) => {
-          // go to another screen
-        },
-        onError: (error) => {
-          // show a error message
-        },
-      }
-    );
+  const handleNewPostButton = async () => {
+    const data = {
+      body: "beautyful body test",
+      title: "title test",
+      userId: 1,
+    };
+
+    try {
+      const value = await addMutation.mutateAsync(data);
+      console.log("Everything worked fine");
+      console.log("handleNewPostButton after mutate");
+    } catch (error) {
+      // show a error message
+    }
   };
 
   return (
