@@ -25,11 +25,21 @@ export const TanStack = () => {
   };
 
   const handleNewPostButton = () => {
-    addMutation.mutate({
-      body: "beautyful body test",
-      title: "title test",
-      userId: 1,
-    });
+    addMutation.mutate(
+      {
+        body: "beautyful body test",
+        title: "title test",
+        userId: 1,
+      },
+      {
+        onSuccess: (data) => {
+          // go to another screen
+        },
+        onError: (error) => {
+          // show a error message
+        },
+      }
+    );
   };
 
   return (
