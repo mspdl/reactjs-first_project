@@ -3,6 +3,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 type Inputs = {
   name: string;
   lastName: string;
+  age: number;
 };
 
 export const ReactFormExamples = () => {
@@ -19,7 +20,7 @@ export const ReactFormExamples = () => {
         <input
           className="block border p-3 border-white rounded-md mt-3 text-black"
           type="text"
-          {...register("name")}
+          {...register("name", { required: true, minLength: 2, maxLength: 20 })}
           placeholder="Type your name"
         />
         <input
@@ -27,6 +28,12 @@ export const ReactFormExamples = () => {
           type="text"
           {...register("lastName")}
           placeholder="Type your last name"
+        />
+        <input
+          className="block border p-3 border-white rounded-md mt-3 text-black"
+          type="number"
+          {...register("age", { required: true, min: 18, max: 120 })}
+          placeholder="Type your age"
         />
 
         <input
