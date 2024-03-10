@@ -12,8 +12,10 @@ export const Input = (props: UseControllerProps<SignUpForm>) => {
           fieldState.invalid ? "border-red-700" : "border-white"
         } p-3 text-black`}
       />
-      {fieldState.invalid && <p>Invalid</p>}
+      {fieldState.invalid && fieldState.error?.message && <p>Invalid</p>}
       {fieldState.error?.type === "required" && <p>This field is required</p>}
+      {fieldState.error?.type === "min" && <p>Minimum value not reached</p>}
+      {fieldState.error?.type === "max" && <p>Maximum value exceeded</p>}
     </div>
   );
 };

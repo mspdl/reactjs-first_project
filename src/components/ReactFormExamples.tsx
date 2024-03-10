@@ -34,7 +34,7 @@ export const ReactFormExamples = () => {
         />
       </form>
 
-      <button onClick={() => setValue('age', 18)}>Define as adult</button>
+      <button onClick={() => setValue('age', 1)}>Define as adult</button>
     </div>
   );
 };
