@@ -1,59 +1,47 @@
-import { SignUpForm } from "@/types/SignUpForm";
-import { Input } from "@mui/material";
-import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { Form, useForm } from "react-hook-form";
 
 export const ReactFormExamples = () => {
-  const { control, handleSubmit } = useForm<SignUpForm>();
+  const { register, control } = useForm();
 
-  const handleFormSubmit: SubmitHandler<SignUpForm> = (data) => {
-    console.log(data);
+  const handleSucess = () => {
+    alert("It worked successfully!");
+  };
+
+  const handleError = () => {
+    alert("Some error happened!");
   };
 
   return (
     <div className="">
-      <p className="font-bold text-3xl text-center">React Form</p>
-      <form onSubmit={handleSubmit(handleFormSubmit)} className="flex flex-col center">
-        <Controller
-          control={control}
-          name="name"
-          render={({ field, fieldState }) => (
-            <Input
-              {...field}
-              error={fieldState.invalid}
-              style={{ backgroundColor: "#FFF", padding: 2, margin: 2 }}
-            />
-          )}
-          rules={{ required: true, minLength: 2, maxLength: 20 }}
-        />
-        <Controller
-          control={control}
-          name="lastName"
-          render={({ field, fieldState }) => (
-            <Input
-              {...field}
-              error={fieldState.invalid}
-              style={{ backgroundColor: "#FFF", padding: 2, margin: 2 }}
-            />
-          )}
-        />
-        <Controller
-          control={control}
-          name="age"
-          render={({ field, fieldState }) => (
-            <Input
-              {...field}
-              error={fieldState.invalid}
-              style={{ backgroundColor: "#FFF", padding: 2, margin: 2 }}
-            />
-          )}
-          rules={{ required: true, minLength: 18 }}
+      <h1 className="text-3xl text-white font-bold text-center">React form</h1>
+      <Form
+        control={control}
+        className="flex flex-col"
+        encType="application/json"
+        method="post"
+        action={"https://jsonplaceholder.typicode.com/posts"}
+        onSuccess={handleSucess}
+        onError={handleError}
+      >
+        <input
+          className="border border-white p-3 mb-2 text-black"
+          {...register("title", { required: true })}
+          placeholder="Title"
         />
         <input
-          className="border p-3 cursor-pointer border-white mt-3 bg-blue-700 hover:bg-blue-900 rounded-md w-full text-white text-xl"
-          type="submit"
-          value="Send"
+          className="border border-white p-3 mb-2 text-black"
+          {...register("body", { required: true })}
+          placeholder="Body"
         />
-      </form>
+        <input
+          className="border border-white p-3 mb-2 text-black"
+          {...register("userId", { required: true })}
+          placeholder="User ID"
+        />
+        <button className="bg-blue-500 hover:bg-blue-700 text-white py-2 mt-2 rounded-md">
+          Send
+        </button>
+      </Form>
     </div>
   );
 };
