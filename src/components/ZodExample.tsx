@@ -7,5 +7,13 @@ export const ZodExample = () => {
     age: z.number().min(18).max(128),
   });
 
+  type SignUpObject = z.infer<typeof SignUpForm>;
+
+  const obj: SignUpObject = {
+    name: "Morgan",
+    lastName: "Espindola",
+    age: 34,
+  };
+
   return <div className=""></div>;
 };
